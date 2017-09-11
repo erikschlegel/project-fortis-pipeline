@@ -53,12 +53,15 @@ while [[ -z ${cassandra_host} || -z ${DEIS_ROUTER_HOST_ROOT} ]]; do
    sleep 3
 done
 
-readonly graphql_service_host="fortis-services.${DEIS_ROUTER_HOST_ROOT}.nip.io"
-readonly fortis_interface_host="fortis-interface.${DEIS_ROUTER_HOST_ROOT}.nip.io"
+readonly graphql_service_host="http://fortis-services.${DEIS_ROUTER_HOST_ROOT}.nip.io"
+readonly fortis_interface_host="http://fortis-interface.${DEIS_ROUTER_HOST_ROOT}.nip.io"
 readonly feature_service_db_conn_str="${FEATURE_SERVICE_DB_CONNECTION_STRING}"
 readonly feature_service_host="http://fortis-features.eastus.cloudapp.azure.com"
 readonly fortis_central_directory="https://fortiscentral.blob.core.windows.net/"
 readonly spark_config_map_name="spark-master-conf"
+
+#This needs to be exporting to the environment as the creat-react-app assett pipeline polyfills this into the build. 
+export REACT_APP_SERVICE_HOST="${fortis_interface_host}"
 
 echo "Finished. Installing cassandra cqlsh cli."
 ./storage-ddls/install-cassandra-ddls.sh "${cassandra_extlb_host}"
