@@ -58,6 +58,8 @@ echo FORTIS_SB_CONN_STR="${sb_conn_str}"
 echo CASSANDRA_USERNAME="cassandra"
 echo CASSANDRA_PASSWORD="cassandra"
 echo CASSANDRA_KEYSPACE="fortis"
+echo USER_FILES_BLOB_ACCOUNT_NAME="${storage_account_name}"
+echo USER_FILES_BLOB_ACCOUNT_KEY="${storage_account_key}"
 echo ENABLE_V2=1
 } >> .env
 
