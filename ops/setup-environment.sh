@@ -15,6 +15,7 @@ readonly eh_conn_str="${9}"
 readonly fortis_central_directory="${10}"
 readonly sb_conn_str="${11}"
 readonly storage_account_name="${12}"
+readonly storage_account_key="${13}"
 
 readonly fortis_admin_interface="http://${fortis_interface_host}/#/site/${site_name}/admin"
 readonly default_language="en"
