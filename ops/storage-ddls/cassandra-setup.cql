@@ -79,9 +79,12 @@ CREATE TABLE watchlist(
     topic text,
     lang_code text,
     translations map<text, text>,
+    category text,
     insertiontime timestamp,
-    PRIMARY KEY (topic, lang_code)
+    PRIMARY KEY ((topic, lang_code), category)
 );
+
+CREATE INDEX ON fortis.watchlist (category);
 
 CREATE TABLE blacklist(
     id uuid,
@@ -102,7 +105,6 @@ CREATE TABLE sitesettings(
     cogspeechsvctoken text,
     cogvisionsvctoken text,
     cogtextsvctoken text,
-    featureservicenamespace: text,
     insertiontime timestamp,
     PRIMARY KEY (sitename)
 );
@@ -114,6 +116,7 @@ CREATE TABLE streams (
     pipelineicon text,
     streamfactory text,
     params frozen<map<text, text>>,
+    enabled boolean,
     PRIMARY KEY (pipelinekey, streamid)
 );
 
