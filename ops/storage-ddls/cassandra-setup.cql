@@ -86,7 +86,7 @@ CREATE TABLE watchlist(
 CREATE TABLE blacklist(
     id uuid,
     conjunctivefilter frozen<list<text>>,
-    filtertype text,
+    islocation boolean,
     PRIMARY KEY (id)
 );
 
@@ -241,6 +241,10 @@ CREATE TABLE events(
     PRIMARY KEY (eventid)
 );
 
+/**************************************
+ * Views
+ *************************************/
+
 CREATE MATERIALIZED VIEW populartopics
 AS SELECT periodtype, conjunctiontopic1, conjunctiontopic2, conjunctiontopic3, externalsourceid, pipelinekey, tilez, 
           tileid, perioddate, mentioncount, avgsentimentnumerator
@@ -286,10 +290,6 @@ AS SELECT batchid, eventid
    WHERE batchid IS NOT NULL
      AND eventid IS NOT NULL
 PRIMARY KEY (batchid, eventid);
-
-/**************************************
- * Views
- *************************************/
 
 CREATE MATERIALIZED VIEW popularsources
 AS SELECT periodtype, conjunctiontopic1, conjunctiontopic2, conjunctiontopic3, tilez, externalsourceid, pipelinekey, 
