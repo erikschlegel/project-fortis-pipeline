@@ -7,7 +7,7 @@ export DEIS_PROFILE="/root/.deis/client.json"
 
 cd project-fortis-services || exit -2
 deis create fortis-services
-deis git:remote --force --remote deis --app fortis-services
+#deis git:remote --force --remote deis --app fortis-services
 #deis certs:attach fortis fortis-services
 deis limits:set web=512M
 deis autoscale:set web --min=2 --max=5 --cpu-percent=75

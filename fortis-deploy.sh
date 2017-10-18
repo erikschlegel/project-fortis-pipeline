@@ -275,4 +275,5 @@ chmod 752 create-cluster.sh
     "${sb_conn_str}" \
     "${storage_account_key}" \
     "${checkpointfileshare}" \
-    "${site_type}"
+    "${site_type}" \
+    "${app_id}"

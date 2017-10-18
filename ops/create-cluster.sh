@@ -12,6 +12,7 @@ readonly sb_conn_str="$9"
 readonly storage_account_key="${10}"
 readonly checkpointfileshare="${11}"
 readonly site_type="${12}"
+readonly app_id="${13}"
 
 chmod -R 752 .
 
@@ -53,6 +54,13 @@ readonly feature_service_host="http://fortis-features.eastus.cloudapp.azure.com"
 readonly fortis_central_directory="https://fortiscentral.blob.core.windows.net/"
 readonly spark_config_map_name="spark-master-conf"
 
+# This needs to be set before we call fortis-interface/deploy-app.sh as create react app needs the 
+# vars sourced in the env when we call npm run build
+{
+echo REACT_APP_SERVICE_HOST="${graphql_service_host}"
+echo REACT_APP_FEATURE_SERVICE_HOST="${feature_service_host}"
+} >> ./deis-apps/fortis-interface/.env
+
 echo "Finished. Now deploying"
 ./deis-apps/fortis-interface/deploy-app.sh
 
@@ -78,7 +86,8 @@ echo "Finished. Deploying environment settings to cluster."
     "${fortis_central_directory}" \
     "${sb_conn_str}" \
     "${storage_account_name}" \
-    "${storage_account_key}"
+    "${storage_account_key}" \
+    "${app_id}"
 
 echo "Finished. Installing spark cluster."
 ./install-spark.sh "${k8spark_worker_count}" "${spark_config_map_name}" "${fortis_central_directory}" "${storage_account_name}" "${storage_account_key}" "${checkpointfileshare}"
